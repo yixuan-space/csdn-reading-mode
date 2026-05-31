@@ -1,14 +1,21 @@
 // ==UserScript==
 // @name         CSDN 沉浸阅读助手
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/yixuan-space
 // @version      1.0.0
-// @description  为 CSDN 博客文章页面添加 Notion 风格的阅读模式和 PDF 导出功能
-// @author       YiXuan
-// @match        https://*.csdn.net/*
+// @license      MIT
+// @description  将 CSDN 博客页面转换为沉浸式阅读模式，并提供 PDF 导出功能，去除广告和无关元素，提升阅读体验。
+// @author       yixuan-space
+// @homepageURL  https://github.com/yixuan-space/csdn-reading-mode
+// @supportURL   https://github.com/yixuan-space/csdn-reading-mode/issues
+// @run-at       document-end
+// @match        *://*.csdn.net/*
+// @exclude      *://download.csdn.net/*
+// @exclude      *://passport.csdn.net/*
+// @exclude      *://account.csdn.net/*
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
   'use strict';
 
   if (window.csdnNotionModeV8) return;
@@ -41,7 +48,7 @@
       modeStyle.remove();
       modeStyle = null;
     }
-    document.querySelectorAll('#content_views img').forEach(function(img) {
+    document.querySelectorAll('#content_views img').forEach(function (img) {
       var p = img.parentElement;
       if (p && p.tagName === 'P') {
         p.style.textAlign = '';
@@ -153,7 +160,7 @@ visibility:hidden!important;margin-right:0!important}\
 
     document.head.appendChild(modeStyle);
 
-    document.querySelectorAll('#content_views img').forEach(function(img) {
+    document.querySelectorAll('#content_views img').forEach(function (img) {
       var p = img.parentElement;
       if (p && p.tagName === 'P') {
         p.style.textAlign = 'center';
@@ -176,13 +183,13 @@ visibility:hidden!important;margin-right:0!important}\
     var contentClone = contentEl.cloneNode(true);
 
     // 移除克隆中的脚本
-    contentClone.querySelectorAll('script').forEach(function(s) { s.remove(); });
+    contentClone.querySelectorAll('script').forEach(function (s) { s.remove(); });
 
     // 处理图片：补全地址并优化打印样式
-    contentClone.querySelectorAll('img').forEach(function(img) {
+    contentClone.querySelectorAll('img').forEach(function (img) {
       var realSrc = img.getAttribute('src') || img.dataset.src || '';
       if (realSrc && realSrc.indexOf('http') !== 0) {
-        try { realSrc = new URL(realSrc, window.location.href).href; } catch(e) {}
+        try { realSrc = new URL(realSrc, window.location.href).href; } catch (e) { }
       }
       img.removeAttribute('data-src');
       img.setAttribute('src', realSrc);
@@ -235,7 +242,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
     printWindow.document.write(html);
     printWindow.document.close();
 
-    setTimeout(function() {
+    setTimeout(function () {
       printWindow.focus();
       printWindow.print();
     }, 400);
@@ -283,13 +290,13 @@ box-shadow:0 2px 6px rgba(0,0,0,0.08)!important}';
     toggleBtn.id = 'notion-mode-toggle';
     toggleBtn.textContent = '阅读模式';
     toggleBtn.type = 'button';
-    toggleBtn.onclick = function() { toggleMode(); };
+    toggleBtn.onclick = function () { toggleMode(); };
 
     pdfBtn = document.createElement('button');
     pdfBtn.id = 'notion-pdf-btn';
     pdfBtn.textContent = '导出 PDF';
     pdfBtn.type = 'button';
-    pdfBtn.onclick = function() { exportPDF(); };
+    pdfBtn.onclick = function () { exportPDF(); };
 
     if (document.body) {
       document.body.insertBefore(toggleBtn, document.body.firstChild);
