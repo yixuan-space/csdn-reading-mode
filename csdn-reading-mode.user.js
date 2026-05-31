@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         CSDN 沉浸阅读助手
 // @namespace    https://github.com/yixuan-space
-// @version      1.0.0
+// @version      1.0.1
 // @license      MIT
 // @description  将 CSDN 博客页面转换为沉浸式阅读模式，并提供 PDF 导出功能，去除广告和无关元素，提升阅读体验。
 // @author       yixuan-space
 // @homepageURL  https://github.com/yixuan-space/csdn-reading-mode
 // @supportURL   https://github.com/yixuan-space/csdn-reading-mode/issues
+// @updateURL    https://raw.githubusercontent.com/yixuan-space/csdn-reading-mode/main/csdn-reading-mode.user.js
+// @downloadURL  https://raw.githubusercontent.com/yixuan-space/csdn-reading-mode/main/csdn-reading-mode.user.js
 // @run-at       document-end
 // @match        *://*.csdn.net/*
 // @exclude      *://download.csdn.net/*
@@ -14,6 +16,7 @@
 // @exclude      *://account.csdn.net/*
 // @grant        none
 // ==/UserScript==
+
 
 (function () {
   'use strict';
