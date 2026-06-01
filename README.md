@@ -21,9 +21,9 @@
 
 ## 预览
 
-| 阅读模式 | PDF 导出 |
+| 阅读模式开启前 | 阅读模式开启后 |
 |---------|---------|
-| ![阅读模式](https://via.placeholder.com/400x300?text=Reading+Mode) | ![PDF 导出](https://via.placeholder.com/400x300?text=PDF+Export) |
+| ![阅读模式](images/image1.png) | ![阅读模式](images/image.png) |
 
 ## 贡献
 
